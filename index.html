@@ -1,6 +1,143 @@
 <!DOCTYPE html>
 <html lang="lt">
+<head><!DOCTYPE html>
+<html lang="lt">
 <head>
+<meta charset="UTF-8">
+<title>LinguaFlow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f5f5f0;
+  color: #2c3e50;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,.05);
+}
+button {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: #6b8e7b;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+button.secondary {
+  background: #e8d5c4;
+  color: #2c3e50;
+}
+.hidden { display: none; }
+.xp { font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <strong>🌐 LinguaFlow</strong>
+  <div class="xp">⭐ <span id="xp">0</span> XP · Lvl <span id="level">1</span></div>
+</header>
+
+<div class="container">
+
+<div class="card" id="start">
+  <h2>🔊 Klausyk</h2>
+  <p><strong>Hello</strong></p>
+  <p>Ar girdėjai šį žodį anksčiau?</p>
+  <button onclick="goLanguage()">😎 Taip</button>
+  <button class="secondary" onclick="goLanguage()">🤔 Ne</button>
+</div>
+
+<div class="card hidden" id="language">
+  <h2>Pasirink kalbą</h2>
+  <button onclick="goChallenge()">🇬🇧 English</button>
+  <button onclick="goChallenge()">🇳🇱 Dutch</button>
+  <button onclick="goChallenge()">🇵🇱 Polish</button>
+</div>
+
+<div class="card hidden" id="challenge">
+  <h2>⚡ Greitas iššūkis</h2>
+  <p>Ką reiškia <strong>Hello</strong>?</p>
+  <button onclick="goResult(true)">Labas</button>
+  <button class="secondary" onclick="goResult(false)">Ačiū</button>
+</div>
+
+<div class="card hidden" id="result">
+  <h2>🎉 Puikus startas!</h2>
+  <p>Tu jau mokaisi.</p>
+  <button onclick="goLesson()">▶️ Pradėti pamoką</button>
+</div>
+
+<div class="card hidden" id="lesson">
+  <h2>🔥 Pirma pamoka</h2>
+  <p>Sveikas atvykęs. Čia prasideda visas smagumas 😉</p>
+</div>
+
+</div>
+
+<script>
+let xp = 0;
+let level = 1;
+
+function addXP(val){
+  xp += val;
+  if(xp >= 50) level = 2;
+  document.getElementById("xp").textContent = xp;
+  document.getElementById("level").textContent = level;
+}
+
+function hideAll(){
+  document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+}
+
+function goLanguage(){
+  addXP(10);
+  hideAll();
+  document.getElementById("language").classList.remove('hidden');
+}
+
+function goChallenge(){
+  addXP(20);
+  hideAll();
+  document.getElementById("challenge").classList.remove('hidden');
+}
+
+function goResult(correct){
+  addXP(correct ? 20 : 10);
+  hideAll();
+  document.getElementById("result").classList.remove('hidden');
+}
+
+function goLesson(){
+  addXP(30);
+  hideAll();
+  document.getElementById("lesson").classList.remove('hidden');
+}
+</script>
+
+</body>
+</html>
+
 <meta charset="UTF-8">
 <title>LinguaFlow</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,3 +275,4 @@ function answerChallenge(correct) {
 
 </body>
 </html>
+
