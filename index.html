@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<title>LinguaFlow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f5f5f0;
+  color: #2c3e50;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.xp {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,.05);
+}
+
+button {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: #6b8e7b;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button.secondary {
+  background: #e8d5c4;
+  color: #2c3e50;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <strong>🌐 LinguaFlow</strong>
+  <div class="xp">⭐ <span id="xp">0</span> XP · Lvl <span id="level">1</span></div>
+</header>
+
+<div class="container">
+
+  <!-- START ACTION (0 sekundė) -->
+  <div class="card" id="start">
+    <h2>🔊 Klausyk</h2>
+    <p><strong>Hello</strong></p>
+    <p>Ar girdėjai šį žodį anksčiau?</p>
+    <button onclick="startAnswer()">😎 Taip</button>
+    <button class="secondary" onclick="startAnswer()">🤔 Ne</button>
+  </div>
+
+  <!-- LANGUAGE SELECT -->
+  <div class="card hidden" id="language">
+    <h2>Pasirink kalbą</h2>
+    <button onclick="chooseLanguage('English')">🇬🇧 English</button>
+    <button onclick="chooseLanguage('Dutch')">🇳🇱 Dutch</button>
+    <button onclick="chooseLanguage('Polish')">🇵🇱 Polish</button>
+  </div>
+
+  <!-- FIRST CHALLENGE -->
+  <div class="card hidden" id="challenge">
+    <h2>⚡ Greitas iššūkis</h2>
+    <p>Ką reiškia <strong>Hello</strong>?</p>
+    <button onclick="answerChallenge(true)">Labas</button>
+    <button class="secondary" onclick="answerChallenge(false)">Ačiū</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="card hidden" id="result">
+    <h2>🎉 Puikus startas!</h2>
+    <p>Tu jau pradėjai mokytis.</p>
+    <p><strong>Dar truputį ir prasidės pirma pamoka 😉</strong></p>
+    <button onclick="alert('Čia bus PAMOKA 🔥')">▶️ Pradedam pamoką</button>
+  </div>
+
+</div>
+
+<script>
+let xp = 0;
+let level = 1;
+
+function addXP(amount) {
+  xp += amount;
+  if (xp >= 50) level = 2;
+  if (xp >= 150) level = 3;
+  document.getElementById("xp").textContent = xp;
+  document.getElementById("level").textContent = level;
+}
+
+function startAnswer() {
+  addXP(10);
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("language").classList.remove("hidden");
+}
+
+function chooseLanguage(lang) {
+  addXP(20);
+  document.getElementById("language").classList.add("hidden");
+  document.getElementById("challenge").classList.remove("hidden");
+}
+
+function answerChallenge(correct) {
+  addXP(correct ? 20 : 10);
+  document.getElementById("challenge").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
